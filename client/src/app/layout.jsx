@@ -1,3 +1,4 @@
+import Header from './Header';
 import './globals.css';
 import vazirFont from '@/constants/localFonts';
 
@@ -8,8 +9,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
-      <body className={`${vazirFont.variable} font-sans`}>{children}</body>
+    <html lang='fa' dir='rtl'>
+      <body className={`${vazirFont.variable} font-sans`}>
+        <Header />
+        <div className='container xl:max-w-screen-xl'>{children}</div>
+      </body>
     </html>
   );
 }
