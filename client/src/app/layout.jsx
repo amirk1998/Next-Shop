@@ -1,4 +1,5 @@
 import Header from './Header';
+import Providers from './Providers';
 import './globals.css';
 import vazirFont from '@/constants/localFonts';
 import { Toaster } from 'react-hot-toast';
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
       <body className={`${vazirFont.variable} font-sans`}>
         <Toaster position='top-center' toastOptions={toastOptions} />
         <Header />
-        <div className='container xl:max-w-screen-xl'>{children}</div>
+        <div className='container xl:max-w-screen-xl'>
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

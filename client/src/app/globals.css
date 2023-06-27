@@ -45,6 +45,9 @@
   .btn--primary {
     @apply bg-primary-900 px-4 py-3 text-white shadow-lg shadow-primary-300 hover:bg-primary-800;
   }
+  .btn--loading {
+    @apply cursor-wait bg-primary-900 px-4 py-3 text-white shadow-lg shadow-primary-300;
+  }
 }
 
 html,
