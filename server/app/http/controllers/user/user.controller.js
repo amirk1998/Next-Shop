@@ -1,4 +1,4 @@
-const Controller = require("../controller");
+const Controller = require('../controller');
 const {
   generateRandomNumber,
   toPersianDigits,
@@ -6,20 +6,20 @@ const {
   setRefreshToken,
   verifyRefreshToken,
   getUserCartDetail,
-} = require("../../../../utils/functions");
-const createError = require("http-errors");
-const { UserModel } = require("../../../models/user");
-const Kavenegar = require("kavenegar");
+} = require('../../../../utils/functions');
+const createError = require('http-errors');
+const { UserModel } = require('../../../models/user');
+const Kavenegar = require('kavenegar');
 const CODE_EXPIRES = 90 * 1000; //90 seconds in miliseconds
-const { StatusCodes: HttpStatus } = require("http-status-codes");
-const path = require("path");
-const { ROLES } = require("../../../../utils/constants");
+const { StatusCodes: HttpStatus } = require('http-status-codes');
+const path = require('path');
+const { ROLES } = require('../../../../utils/constants');
 const {
   checkOtpSchema,
   completeProfileSchema,
   updateProfileSchema,
-} = require("../../validators/user/user.schema");
-const { PaymentModel } = require("../../../models/payment");
+} = require('../../validators/user/user.schema');
+const { PaymentModel } = require('../../../models/payment');
 
 class userAuthController extends Controller {
   constructor() {
@@ -31,14 +31,14 @@ class userAuthController extends Controller {
     let { phoneNumber } = req.body;
 
     if (!phoneNumber)
-      throw createError.BadRequest("شماره موبایل معتبر را وارد کنید");
+      throw createError.BadRequest('شماره موبایل معتبر را وارد کنید');
 
     phoneNumber = phoneNumber.trim();
     this.phoneNumber = phoneNumber;
     this.code = generateRandomNumber(6);
 
     const result = await this.saveUser(phoneNumber);
-    if (!result) throw createError.Unauthorized("ورود شما انجام نشد.");
+    if (!result) throw createError.Unauthorized('ورود شما انجام نشد.');
 
     // send OTP
     this.sendOTP(phoneNumber, res);
@@ -72,13 +72,13 @@ class userAuthController extends Controller {
     //   },
     // ]);
 
-    if (!user) throw createError.NotFound("کاربری با این مشخصات یافت نشد");
+    if (!user) throw createError.NotFound('کاربری با این مشخصات یافت نشد');
 
     if (user.otp.code != code)
-      throw createError.BadRequest("کد ارسال شده صحیح نمیباشد");
+      throw createError.BadRequest('کد ارسال شده صحیح نمیباشد');
 
     if (new Date(`${user.otp.expiresIn}`).getTime() < Date.now())
-      throw createError.BadRequest("کد اعتبار سنجی منقضی شده است");
+      throw createError.BadRequest('کد اعتبار سنجی منقضی شده است');
 
     user.isVerifiedPhoneNumber = true;
     await user.save();
@@ -86,7 +86,7 @@ class userAuthController extends Controller {
     // await setAuthCookie(res, user); // set httpOnly cookie
     await setAccessToken(res, user);
     await setRefreshToken(res, user);
-    let WELLCOME_MESSAGE = `کد تایید شد، به فرانت هوکس خوش آمدید`;
+    let WELLCOME_MESSAGE = `کد تایید شد، به نکست شاپ خوش آمدید`;
     if (!user.isActive)
       WELLCOME_MESSAGE = `کد تایید شد، لطفا اطلاعات خود را تکمیل کنید`;
 
@@ -119,7 +119,7 @@ class userAuthController extends Controller {
   }
   async updateUser(phoneNumber, objectData = {}) {
     Object.keys(objectData).forEach((key) => {
-      if (["", " ", 0, null, undefined, "0", NaN].includes(objectData[key]))
+      if (['', ' ', 0, null, undefined, '0', NaN].includes(objectData[key]))
         delete objectData[key];
     });
     const updatedResult = await UserModel.updateOne(
@@ -136,10 +136,10 @@ class userAuthController extends Controller {
       {
         receptor: phoneNumber,
         token: this.code,
-        template: "registerVerify",
+        template: 'registerVerify',
       },
       (response, status) => {
-        console.log("kavenegar message status", status);
+        console.log('kavenegar message status', status);
         if (response && status === 200)
           return res.status(HttpStatus.OK).send({
             statusCode: HttpStatus.OK,
@@ -154,7 +154,7 @@ class userAuthController extends Controller {
 
         return res.status(status).send({
           statusCode: status,
-          message: "کد اعتبارسنجی ارسال نشد",
+          message: 'کد اعتبارسنجی ارسال نشد',
         });
       }
     );
@@ -165,13 +165,13 @@ class userAuthController extends Controller {
     const { name, email } = req.body;
 
     if (!user.isVerifiedPhoneNumber)
-      throw createError.Forbidden("شماره موبایل خود را تایید کنید.");
+      throw createError.Forbidden('شماره موبایل خود را تایید کنید.');
 
     const duplicateUser = await UserModel.findOne({ email });
 
     if (duplicateUser)
       throw createError.BadRequest(
-        "کاربری با این ایمیل قبلا ثبت نام کرده است."
+        'کاربری با این ایمیل قبلا ثبت نام کرده است.'
       );
 
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -186,7 +186,7 @@ class userAuthController extends Controller {
     return res.status(HttpStatus.OK).send({
       statusCode: HttpStatus.OK,
       data: {
-        message: "اطلاعات شما با موفقیت تکمیل شد",
+        message: 'اطلاعات شما با موفقیت تکمیل شد',
         user: updatedUser,
       },
     });
@@ -203,11 +203,11 @@ class userAuthController extends Controller {
       }
     );
     if (!updateResult.modifiedCount === 0)
-      throw createError.BadRequest("اطلاعات ویرایش نشد");
+      throw createError.BadRequest('اطلاعات ویرایش نشد');
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
       data: {
-        message: "اطلاعات با موفقیت آپدیت شد",
+        message: 'اطلاعات با موفقیت آپدیت شد',
       },
     });
   }
@@ -244,14 +244,14 @@ class userAuthController extends Controller {
       expires: Date.now(),
       httpOnly: true,
       signed: true,
-      sameSite: "Lax",
+      sameSite: 'Lax',
       secure: true,
-      path: "/",
+      path: '/',
       domain:
-        process.env.NODE_ENV === "development" ? "localhost" : ".fronthooks.ir",
+        process.env.NODE_ENV === 'development' ? 'localhost' : '.fronthooks.ir',
     };
-    res.cookie("accessToken", null, cookieOptions);
-    res.cookie("refreshToken", null, cookieOptions);
+    res.cookie('accessToken', null, cookieOptions);
+    res.cookie('refreshToken', null, cookieOptions);
 
     return res.status(HttpStatus.OK).json({
       StatusCode: HttpStatus.OK,
