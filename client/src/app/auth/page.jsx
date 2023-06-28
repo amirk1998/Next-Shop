@@ -1,19 +1,20 @@
 'use client';
 import { useEffect, useState } from 'react';
 import SendOTPForm from './SendOTPForm';
-import http from '@/services/httpService';
 import { toast } from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import { checkOTP, getOTP } from '@/services/authServices';
 import CheckOTPForm from './CheckOTPForm';
+import { useRouter } from 'next/navigation';
 
 const RESEND_TIME = 90;
 
 const AuthPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [time, setTime] = useState(RESEND_TIME);
+  const router = useRouter();
 
   const {
     data: otpResponse,
@@ -24,9 +25,11 @@ const AuthPage = () => {
     mutationFn: getOTP,
   });
 
-  const { mutateAsync: mutateCheckOTP } = useMutation({
-    mutationFn: checkOTP,
-  });
+  const { isLoading: isCheckingOtp, mutateAsync: mutateCheckOTP } = useMutation(
+    {
+      mutationFn: checkOTP,
+    }
+  );
 
   const handlerPhoneNumber = (e) => {
     setPhoneNumber(e.target.value);
@@ -48,9 +51,14 @@ const AuthPage = () => {
   const handlerCheckOTP = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateCheckOTP({ phoneNumber, otp });
-      toast.success(data?.message);
-      // setStep(2);
+      const { message, user } = await mutateCheckOTP({ phoneNumber, otp });
+      toast.success(message);
+
+      if (user.isActive) {
+        router.push('/');
+      } else {
+        router.push('/complete-profile');
+      }
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -88,6 +96,7 @@ const AuthPage = () => {
             onResendOTP={handlerSendOTP}
             time={time}
             otpResponse={otpResponse}
+            isLoading={isCheckingOtp}
           />
         );
 
