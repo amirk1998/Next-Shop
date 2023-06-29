@@ -13,11 +13,6 @@ const MyProfilePage = () => {
   const includesKey = ['name', 'email', 'phoneNumber', 'biography'];
   const [formData, setFormData] = useState({});
 
-  // if (user) {
-  //   console.log(Object.keys(includeObj(user, includesKey)));
-  //   console.log(includeObj(user, includesKey));
-  // }
-
   useEffect(() => {
     if (user) setFormData(includeObj(user, includesKey));
   }, [user]);
