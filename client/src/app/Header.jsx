@@ -7,8 +7,6 @@ const Header = () => {
 
   const { user, cart } = data || {};
 
-  console.log({ data, error, isLoading });
-
   return (
     <header
       className={`sticky top-0 mb-10 shadow-md transition-all duration-300 ${
@@ -33,8 +31,20 @@ const Header = () => {
             </Link>
           </li>
 
+          {user && user.role === 'ADMIN' && (
+            <li>
+              <Link className='block py-2' href='/admin'>
+                پنل ادمین
+              </Link>
+            </li>
+          )}
+
           {user ? (
-            <span>{user.name}</span>
+            <li>
+              <Link className='block py-2' href='/profile'>
+                پروفایل : {user.name}
+              </Link>
+            </li>
           ) : (
             <li>
               <Link className='block py-2' href='/auth'>
