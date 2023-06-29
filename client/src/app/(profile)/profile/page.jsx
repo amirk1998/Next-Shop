@@ -6,13 +6,11 @@ import { toLocalDateString } from '@/utils/toLocalDate';
 
 const Profile = () => {
   const { data, isLoading } = useGetUser();
-  const { user, cart } = data || {};
+  const { user } = data || {};
 
   if (isLoading)
     return (
       <div className='inline-flex items-center'>
-        {/* <h1 className='mb-6 text-4xl font-bold'>صفحه پروفایل کاربر</h1> */}
-        {/* <span>Loading...</span> */}
         <LoadingSpinner />
       </div>
     );
