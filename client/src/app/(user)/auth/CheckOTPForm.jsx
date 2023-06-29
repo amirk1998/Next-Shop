@@ -1,6 +1,6 @@
 import OtpInput from 'react-otp-input';
 import { HiArrowSmallRight, HiOutlinePencilSquare } from 'react-icons/hi2';
-import LoadingButton from '@/common/Loading';
+import LoadingButton from '@/common/LoadingButton';
 
 const CheckOTPForm = ({
   otp,

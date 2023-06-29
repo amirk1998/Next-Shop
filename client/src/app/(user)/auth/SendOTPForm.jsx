@@ -1,4 +1,4 @@
-import LoadingButton from '@/common/Loading';
+import LoadingButton from '@/common/LoadingButton';
 import TextField from '@/common/TextField';
 
 const SendOTPForm = ({ phoneNumber, onChange, onSubmit, isLoading }) => {

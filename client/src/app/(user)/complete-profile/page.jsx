@@ -1,5 +1,5 @@
 'use client';
-import LoadingButton from '@/common/Loading';
+import LoadingButton from '@/common/LoadingButton';
 import TextField from '@/common/TextField';
 import { completeProfile } from '@/services/authServices';
 import { useMutation } from '@tanstack/react-query';
