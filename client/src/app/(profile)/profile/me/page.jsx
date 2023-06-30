@@ -1,14 +1,23 @@
 'use client';
 
 import LoadingSpinner from '@/common/Loading';
+import LoadingButton from '@/common/LoadingButton';
 import TextField from '@/common/TextField';
 import { useGetUser } from '@/hooks/useAuth';
+import { updateUserProfile } from '@/services/authServices';
 import { includeObj } from '@/utils/objectUtils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const MyProfilePage = () => {
   const { data, isLoading } = useGetUser();
   const { user } = data || {};
+  const queryClient = useQueryClient();
+
+  const { isLoading: isUpdating, mutateAsync } = useMutation({
+    mutationFn: updateUserProfile,
+  });
 
   const includesKey = ['name', 'email', 'phoneNumber', 'biography'];
   const [formData, setFormData] = useState({});
@@ -16,6 +25,17 @@ const MyProfilePage = () => {
   useEffect(() => {
     if (user) setFormData(includeObj(user, includesKey));
   }, [user]);
+
+  const handlerSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { message } = await mutateAsync(formData);
+      queryClient.invalidateQueries({ queryKey: ['get-user-profile'] });
+      toast.success(message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   if (isLoading)
     return (
@@ -26,13 +46,11 @@ const MyProfilePage = () => {
       </div>
     );
 
-  console.log(formData);
-
   return (
     <div className='container sm:max-w-screen-sm'>
       <h1 className='mb-6 text-3xl font-semibold'> اطلاعات کاربری</h1>
 
-      <form className='space-y-6'>
+      <form onSubmit={handlerSubmit} className='space-y-6'>
         {user &&
           Object.keys(includeObj(user, includesKey)).map((key) => {
             return (
@@ -44,10 +62,17 @@ const MyProfilePage = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, [e.target.name]: e.target.value })
                 }
-                dir='ltr'
               />
             );
           })}
+
+        {isLoading ? (
+          <LoadingButton />
+        ) : (
+          <button type='submit' className='btn btn--primary w-full'>
+            تایید
+          </button>
+        )}
       </form>
     </div>
   );
