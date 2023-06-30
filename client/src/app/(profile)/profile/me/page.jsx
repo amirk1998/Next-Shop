@@ -20,6 +20,14 @@ const MyProfilePage = () => {
   });
 
   const includesKey = ['name', 'email', 'phoneNumber', 'biography'];
+
+  // const includesKey = [
+  //   { value: 'name', label: 'نام و نام خانوادگی' },
+  //   { value: 'email', label: 'ایمیل' },
+  //   { value: 'phoneNumber', label: 'شماره موبایل' },
+  //   { value: 'biography', label: ' بیوگرافی' },
+  // ];
+
   const [formData, setFormData] = useState({});
 
   useEffect(() => {

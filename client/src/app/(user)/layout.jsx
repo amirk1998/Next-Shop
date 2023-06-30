@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import toastOptions from '@/utils/toastOptions';
 
 export const metadata = {
-  title: 'Next Shop Panel',
+  title: 'Shop Next Panel',
   description: 'Next.js Advanced Project',
 };
 
