@@ -2,12 +2,11 @@ import { getCategories } from '@/services/categoryService';
 import { getProducts } from '@/services/productService';
 import CategorySidebar from './[slug]/CategorySidebar';
 import queryString from 'query-string';
+export const dynamic = 'force-dynamic';
 
 const ProductsPage = async ({ params, searchParams }) => {
   const { products } = await getProducts(queryString.stringify(searchParams));
   const { categories } = await getCategories();
-
-  // console.log(queryString.stringify(searchParams));
 
   return (
     <div>
