@@ -4,6 +4,7 @@ import CategorySidebar from './CategorySidebar';
 import queryString from 'query-string';
 import { toLocalDateString, toLocalDateStringShort } from '@/utils/toLocalDate';
 import Link from 'next/link';
+import AddToCart from './[slug]/AddToCart';
 export const dynamic = 'force-dynamic';
 
 const ProductsPage = async ({ params, searchParams }) => {
@@ -35,6 +36,9 @@ const ProductsPage = async ({ params, searchParams }) => {
                 >
                   مشاهده محصول
                 </Link>
+                <div className='mt-4'>
+                  <AddToCart product={product} />
+                </div>
               </div>
             );
           })}
