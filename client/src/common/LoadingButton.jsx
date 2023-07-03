@@ -1,11 +1,6 @@
 const LoadingButton = () => {
   return (
-    <button
-      disabled
-      type='button'
-      className='btn btn--loading w-full'
-      dir='rtl'
-    >
+    <button disabled type='button' className='btn btn--loading' dir='rtl'>
       <svg
         aria-hidden='true'
         role='status'

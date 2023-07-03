@@ -15,4 +15,12 @@ const toastOptions = {
   },
 };
 
+export const infoToastStyle = {
+  duration: 3000,
+  style: {
+    background: '#3b82f6',
+    color: '#fff',
+  },
+};
+
 export default toastOptions;
