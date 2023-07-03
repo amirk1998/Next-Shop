@@ -8,3 +8,13 @@ export function toLocalDateString(date) {
 
   return new Date(date).toLocaleDateString('fa-IR', options);
 }
+
+export function toLocalDateStringShort(date) {
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  };
+
+  return new Date(date).toLocaleDateString('fa-IR', options);
+}

@@ -20,7 +20,6 @@ const ProductsSort = () => {
     (name, value) => {
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
-
       return params.toString();
     },
     [searchParams]

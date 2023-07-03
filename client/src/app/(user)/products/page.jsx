@@ -2,6 +2,8 @@ import { getCategories } from '@/services/categoryService';
 import { getProducts } from '@/services/productService';
 import CategorySidebar from './CategorySidebar';
 import queryString from 'query-string';
+import { toLocalDateString, toLocalDateStringShort } from '@/utils/toLocalDate';
+import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 const ProductsPage = async ({ params, searchParams }) => {
@@ -20,7 +22,19 @@ const ProductsPage = async ({ params, searchParams }) => {
                 className='col-span-1 rounded-xl border p-4 shadow-md'
                 key={product._id}
               >
-                <h2 className='font-bold'>{product.title}</h2>
+                <h2 className='mb-4 text-xl font-bold'>{product.title}</h2>
+                <div className='mb-4'>
+                  <span>تاریخ ساختن : </span>
+                  <span className='font-bold'>
+                    {toLocalDateStringShort(product.createdAt)}
+                  </span>
+                </div>
+                <Link
+                  className='font-bold text-primary-900'
+                  href={`/products/${product.slug}`}
+                >
+                  مشاهده محصول
+                </Link>
               </div>
             );
           })}
