@@ -1,6 +1,6 @@
 import { getCategories } from '@/services/categoryService';
 import { getProducts } from '@/services/productService';
-import CategorySidebar from './[slug]/CategorySidebar';
+import CategorySidebar from './CategorySidebar';
 import queryString from 'query-string';
 export const dynamic = 'force-dynamic';
 

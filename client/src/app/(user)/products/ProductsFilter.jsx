@@ -1,9 +1,10 @@
 'use client';
-import CheckBox from '@/common/CheckBox';
-import { useCallback, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const CategorySidebar = ({ categories }) => {
+import CheckBox from '@/common/CheckBox';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
+
+const ProductsFilter = ({ categories }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -38,9 +39,9 @@ const CategorySidebar = ({ categories }) => {
   };
 
   return (
-    <div className='col-span-1 bg-red-100'>
-      <p className='mb-4 font-bold'>دسته بندی ها</p>
-      <ul className='space-y-4'>
+    <div>
+      <p className='mb-4 text-lg font-bold'>دسته بندی ها</p>
+      <ul className='space-y-2'>
         {categories.map((category) => {
           return (
             <CheckBox
@@ -59,4 +60,4 @@ const CategorySidebar = ({ categories }) => {
   );
 };
 
-export default CategorySidebar;
+export default ProductsFilter;
