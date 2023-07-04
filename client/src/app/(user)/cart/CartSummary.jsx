@@ -1,10 +1,29 @@
+import LoadingButton from '@/common/LoadingButton';
+import { createPayment } from '@/services/paymentService';
 import {
   toPersianNumbers,
   toPersianNumbersWithComma,
 } from '@/utils/toPersianNumbers';
+import { useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 const CartSummary = ({ payDetail }) => {
   const { totalOffAmount, totalPrice, totalGrossPrice } = payDetail;
+
+  const { isLoading, mutateAsync } = useMutation({ mutationFn: createPayment });
+
+  const handlerCreatePayment = async (e) => {
+    try {
+      const { message } = await mutateAsync();
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ['get-user-profile'] });
+    } catch (error) {
+      if (error?.response?.data) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div className='rounded-xl border border-secondary-300 p-4 shadow-md'>
@@ -25,7 +44,16 @@ const CartSummary = ({ payDetail }) => {
         <span>مبلغ قابل پرداخت : </span>
         <span>{toPersianNumbersWithComma(totalPrice)}</span>
       </div>
-      <button className='btn btn--primary w-full'>ثبت سفارش</button>
+      {isLoading ? (
+        <LoadingButton isWidthFull={true} />
+      ) : (
+        <button
+          onClick={handlerCreatePayment}
+          className='btn btn--primary w-full'
+        >
+          ثبت سفارش
+        </button>
+      )}
     </div>
   );
 };
