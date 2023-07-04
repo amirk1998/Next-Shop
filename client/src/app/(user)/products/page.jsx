@@ -2,7 +2,7 @@ import { getCategories } from '@/services/categoryService';
 import { getProducts } from '@/services/productService';
 import CategorySidebar from './CategorySidebar';
 import queryString from 'query-string';
-import { toLocalDateString, toLocalDateStringShort } from '@/utils/toLocalDate';
+import { toLocalDateStringShort } from '@/utils/toLocalDate';
 import Link from 'next/link';
 import AddToCart from './[slug]/AddToCart';
 export const dynamic = 'force-dynamic';

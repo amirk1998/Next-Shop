@@ -13,7 +13,7 @@ const SendOTPForm = ({ phoneNumber, onChange, onSubmit, isLoading }) => {
           dir='ltr'
         />
         {isLoading ? (
-          <LoadingButton />
+          <LoadingButton isWidthFull={true} />
         ) : (
           <button type='submit' className='btn btn--primary w-full'>
             ارسال کد تایید

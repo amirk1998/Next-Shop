@@ -48,7 +48,7 @@ const CompleteProfilePage = () => {
             dir='ltr'
           />
           {isLoading ? (
-            <LoadingButton />
+            <LoadingButton isWidthFull={true} />
           ) : (
             <button type='submit' className='btn btn--primary w-full'>
               تایید

@@ -1,6 +1,11 @@
-const LoadingButton = () => {
+const LoadingButton = ({ isWidthFull = false }) => {
   return (
-    <button disabled type='button' className='btn btn--loading' dir='rtl'>
+    <button
+      disabled
+      type='button'
+      className={`btn btn--loading ${isWidthFull ? 'w-full' : ''}`}
+      dir='rtl'
+    >
       <svg
         aria-hidden='true'
         role='status'

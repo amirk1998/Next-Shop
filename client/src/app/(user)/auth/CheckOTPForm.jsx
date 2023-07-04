@@ -50,7 +50,7 @@ const CheckOTPForm = ({
           renderInput={(props) => <input type='number' {...props} />}
         />
         {isLoading ? (
-          <LoadingButton />
+          <LoadingButton isWidthFull={true} />
         ) : (
           <button type='submit' className='btn btn--primary w-full'>
             تایید
