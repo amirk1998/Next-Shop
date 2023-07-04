@@ -10,7 +10,12 @@ const CartPage = () => {
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center'>
+        <LoadingSpinner />
+      </div>
+    );
 
   if (!user || !data)
     return (

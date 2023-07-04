@@ -2,7 +2,7 @@ const CartSummary = ({ payDetail }) => {
   const { totalOffAmount, totalPrice, totalGrossPrice } = payDetail;
 
   return (
-    <div className='rounded-xl border p-2'>
+    <div className='rounded-xl border border-secondary-300 p-4 shadow-md'>
       <p className='mb-4 font-bold'>اطلاعات پرداخت</p>
       <div className='mb-4 flex items-center justify-between'>
         <span>جمع کل : </span>

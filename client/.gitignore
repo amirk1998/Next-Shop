@@ -38,3 +38,6 @@ next-env.d.ts
 # env File
 .env
 .env.production
+
+#Test Folder
+public/TEST/*
