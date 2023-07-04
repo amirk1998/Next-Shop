@@ -1,5 +1,6 @@
 import { getProducts, getProductsBySlug } from '@/services/productService';
 import AddToCart from './AddToCart';
+import { toPersianNumbersWithComma } from '@/utils/toPersianNumbers';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -14,13 +15,13 @@ const ProductsDetail = async ({ params }) => {
       <p className='mb-6'>
         قیمت محصول
         <span className={`${product.discount ? 'line-through' : 'font-bold'}`}>
-          {product.price}
+          {toPersianNumbersWithComma(product.price)}
         </span>
       </p>
       {!!product.discount && (
         <div className='mb-6 flex items-center gap-x-2'>
           <p className='text-xl font-bold'>
-            قیمت با تخفیف : {product.offPrice}
+            قیمت با تخفیف : {toPersianNumbersWithComma(product.offPrice)}
           </p>
           <div className='rounded-xl bg-rose-500 px-2 py-0.5 text-sm text-white'>
             {product.discount} %

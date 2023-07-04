@@ -1,6 +1,10 @@
 'use client';
 
 import { useAddToCart, useDecrementFromCart } from '@/hooks/useCart';
+import {
+  toPersianNumbers,
+  toPersianNumbersWithComma,
+} from '@/utils/toPersianNumbers';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { HiOutlineTrash, HiPlus, HiMinus } from 'react-icons/hi';
@@ -39,28 +43,35 @@ const CartItem = ({ cartItem }) => {
       <span className='flex-1 font-bold'>{cartItem.title}</span>
       <div className='flex flex-1 items-center justify-between gap-x-8'>
         <div>
-          <div>
+          <div className='ml-2'>
             قیمت :
             <span
-              className={`${
+              className={`mr-2 ${
                 cartItem.discount ? 'text-gray-500 line-through' : 'font-bold'
               }`}
             >
-              {cartItem.price}
+              {toPersianNumbersWithComma(cartItem.price)}
             </span>
           </div>
           {!!cartItem.discount && (
             <div className='mt-2 flex items-center gap-x-2'>
-              <p className='font-bold'>{cartItem.offPrice}</p>
+              <p className='font-bold'>
+                {toPersianNumbersWithComma(cartItem.offPrice)}
+              </p>
               <div className='rounded-xl bg-rose-500 px-2 py-0.5 text-sm text-white'>
-                {cartItem.discount} %
+                {toPersianNumbers(cartItem.discount)} %
               </div>
             </div>
           )}
         </div>
-        <span className={`${cartItem.discount ? 'mr-1' : 'mr-8'}`}>
-          تعداد : {cartItem.quantity}
-        </span>
+        <div className='mr-2'>
+          <p className={`${cartItem.discount ? 'mr-3' : 'mr-8'}`}>
+            تعداد :
+            <span className='mr-1 font-bold'>
+              {toPersianNumbers(cartItem.quantity)}
+            </span>
+          </p>
+        </div>
         <div className='flex gap-x-2'>
           <button
             onClick={handlerAddToCart}
