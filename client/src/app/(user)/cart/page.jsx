@@ -4,6 +4,7 @@ import LoadingSpinner from '@/common/Loading';
 import { useGetUser } from '@/hooks/useAuth';
 import Link from 'next/link';
 import CartItem from './CartItem';
+import CartSummary from './CartSummary';
 
 const CartPage = () => {
   const { data, isLoading } = useGetUser();
@@ -47,7 +48,9 @@ const CartPage = () => {
             return <CartItem cartItem={item} key={item._id} />;
           })}
       </div>
-      <div className='col-span-1'>Cart Summary</div>
+      <div className='col-span-1'>
+        <CartSummary payDetail={cart.payDetail} />
+      </div>
     </div>
   );
 };
