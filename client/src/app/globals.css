@@ -52,7 +52,7 @@
     @apply border-b-2 border-b-gray-500 bg-gray-100 p-3 pb-3 pr-8 text-center text-base font-medium lg:text-lg;
   }
   .table__td {
-    @apply border-b border-b-gray-300 p-3 pb-3 pr-8 text-center text-sm lg:text-base;
+    @apply whitespace-nowrap border-b border-b-gray-300 p-3 pb-3 pr-8 text-center text-sm lg:text-base;
   }
 }
 

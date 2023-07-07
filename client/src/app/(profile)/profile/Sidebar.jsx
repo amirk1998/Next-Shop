@@ -21,7 +21,7 @@ const Sidebar = () => {
         </li>
         <li className='p-2 hover:rounded-xl hover:bg-blue-200'>
           <Link className='block' href='/profile'>
-            پروفایل
+            داشبورد
           </Link>
         </li>
         <li className='p-2 hover:rounded-xl hover:bg-blue-200'>
