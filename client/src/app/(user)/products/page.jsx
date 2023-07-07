@@ -4,11 +4,19 @@ import CategorySidebar from './CategorySidebar';
 import queryString from 'query-string';
 import { toLocalDateStringShort } from '@/utils/toLocalDate';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import AddToCart from './[slug]/AddToCart';
+import LikeProduct from './LikeProduct';
+import { toStringCookies } from '@/utils/toStringCookies';
 export const dynamic = 'force-dynamic';
 
 const ProductsPage = async ({ params, searchParams }) => {
-  const { products } = await getProducts(queryString.stringify(searchParams));
+  const cookieStore = cookies();
+  const strCookies = toStringCookies(cookieStore);
+  const { products } = await getProducts(
+    queryString.stringify(searchParams),
+    strCookies
+  );
   const { categories } = await getCategories();
 
   return (
@@ -23,19 +31,24 @@ const ProductsPage = async ({ params, searchParams }) => {
                 className='col-span-1 rounded-xl border p-4 shadow-md'
                 key={product._id}
               >
-                <h2 className='mb-4 text-xl font-bold'>{product.title}</h2>
+                <div className='flex items-center justify-between'>
+                  <h2 className='mb-4 text-xl font-bold'>{product.title}</h2>
+                  <LikeProduct product={product} />
+                </div>
                 <div className='mb-4'>
                   <span>تاریخ ساختن : </span>
                   <span className='font-bold'>
                     {toLocalDateStringShort(product.createdAt)}
                   </span>
                 </div>
+
                 <Link
                   className='font-bold text-primary-900'
                   href={`/products/${product.slug}`}
                 >
                   مشاهده محصول
                 </Link>
+
                 <div className='mt-4'>
                   <AddToCart product={product} />
                 </div>
