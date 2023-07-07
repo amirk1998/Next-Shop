@@ -10,13 +10,13 @@ import { toast } from 'react-hot-toast';
 import { HiOutlineTrash, HiPlus, HiMinus } from 'react-icons/hi';
 
 const CartItem = ({ cartItem }) => {
-  const { isLoading, mutateAsync: AddToCartAsync } = useAddToCart();
+  const { isLoading, mutateAsync: addToCartAsync } = useAddToCart();
   const { mutateAsync: decFromCartAsync } = useDecrementFromCart();
   const queryClient = useQueryClient();
 
   const handlerAddToCart = async () => {
     try {
-      const { message } = await AddToCartAsync(cartItem._id);
+      const { message } = await addToCartAsync(cartItem._id);
       toast.success(message);
       queryClient.invalidateQueries({ queryKey: ['get-user-profile'] });
     } catch (error) {

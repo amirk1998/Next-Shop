@@ -29,6 +29,11 @@ const Sidebar = () => {
             اطلاعات کاربری
           </Link>
         </li>
+        <li className='p-2 hover:rounded-xl hover:bg-blue-200'>
+          <Link className='block' href='/profile/payments'>
+            سفارشات
+          </Link>
+        </li>
         <li className='p-2 text-red-500'>
           <button onClick={handlerLogout} type='button' className=''>
             خروج از حساب کاربری

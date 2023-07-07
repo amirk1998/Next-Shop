@@ -10,8 +10,8 @@ import { toast } from 'react-hot-toast';
 
 const CartSummary = ({ payDetail }) => {
   const { totalOffAmount, totalPrice, totalGrossPrice } = payDetail;
-
   const { isLoading, mutateAsync } = useMutation({ mutationFn: createPayment });
+  const queryClient = useQueryClient();
 
   const handlerCreatePayment = async (e) => {
     try {
