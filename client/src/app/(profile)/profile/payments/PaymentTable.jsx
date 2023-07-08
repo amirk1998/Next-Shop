@@ -48,10 +48,7 @@ const PaymentTable = ({ payments, isDesc = true }) => {
                   <div className='flex flex-col gap-y-2 text-xs lg:text-sm'>
                     {payment.cart.productDetail.map((product) => {
                       return (
-                        <p
-                          className='whitespace-nowrap rounded-xl bg-secondary-600 px-2 py-0.5 text-white'
-                          key={product._id}
-                        >
+                        <p className='badge badge--secondary' key={product._id}>
                           {product.title}
                         </p>
                       );
@@ -64,13 +61,9 @@ const PaymentTable = ({ payments, isDesc = true }) => {
 
                 <td className='table__td'>
                   {payment.status === 'COMPLETED' ? (
-                    <span className='rounded-lg bg-green-600 px-2 py-0.5 text-white'>
-                      موفق
-                    </span>
+                    <span className='badge badge--success'>موفق</span>
                   ) : (
-                    <span className='rounded-lg bg-green-600 px-2 py-0.5 text-white'>
-                      ناموفق
-                    </span>
+                    <span className='badge badge--error'>ناموفق</span>
                   )}
                 </td>
                 {isDesc && (

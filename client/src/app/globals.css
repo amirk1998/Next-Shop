@@ -54,6 +54,24 @@
   .table__td {
     @apply whitespace-nowrap border-b border-b-gray-300 p-3 pb-3 pr-8 text-center text-sm lg:text-base;
   }
+  .sidebar__li {
+    @apply p-2 hover:rounded-xl hover:bg-blue-200;
+  }
+  .badge {
+    @apply whitespace-nowrap rounded-xl px-3 py-1;
+  }
+  .badge--primary {
+    @apply bg-primary-900 text-white;
+  }
+  .badge--secondary {
+    @apply bg-secondary-600 text-white;
+  }
+  .badge--success {
+    @apply bg-green-600 text-white;
+  }
+  .badge--error {
+    @apply bg-rose-600 text-white;
+  }
 }
 
 html,

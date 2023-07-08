@@ -2,7 +2,7 @@
 import { logout } from '@/services/authServices';
 import Link from 'next/link';
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   const handlerLogout = async (e) => {
     await logout();
     localStorage.removeItem('userInfo');
@@ -20,18 +20,33 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className='sidebar__li'>
-          <Link className='block' href='/profile'>
+          <Link className='block' href='/admin'>
             داشبورد
           </Link>
         </li>
         <li className='sidebar__li'>
-          <Link className='block' href='/profile/me'>
-            اطلاعات کاربری
+          <Link className='block' href='/admin/users'>
+            کاربران
           </Link>
         </li>
         <li className='sidebar__li'>
-          <Link className='block' href='/profile/payments'>
+          <Link className='block' href='/admin/products'>
+            محصولات
+          </Link>
+        </li>
+        <li className='sidebar__li'>
+          <Link className='block' href='/admin/categories'>
+            دسته بندی
+          </Link>
+        </li>
+        <li className='sidebar__li'>
+          <Link className='block' href='/admin/payments'>
             سفارشات
+          </Link>
+        </li>
+        <li className='sidebar__li'>
+          <Link className='block' href='/admin/coupons'>
+            کد تخفیف
           </Link>
         </li>
         <li className='p-2 text-red-500'>
@@ -44,4 +59,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;
