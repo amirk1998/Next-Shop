@@ -41,17 +41,21 @@ const UsersTable = ({ users }) => {
                 <td className='table__td'>{user.email}</td>
                 <td className='table__td max-h-40 overflow-y-auto'>
                   <div className='flex flex-col gap-y-2 text-xs lg:text-sm'>
-                    {removeDuplicateObjects(user.Products, '_id').map(
-                      (product) => {
-                        return (
-                          <p
-                            className='badge badge--secondary'
-                            key={product._id}
-                          >
-                            {product.title}
-                          </p>
-                        );
-                      }
+                    {user.Products.length ? (
+                      removeDuplicateObjects(user.Products, '_id').map(
+                        (product) => {
+                          return (
+                            <p
+                              className='badge badge--secondary'
+                              key={product._id}
+                            >
+                              {product.title}
+                            </p>
+                          );
+                        }
+                      )
+                    ) : (
+                      <span> محصولی یافت نشد </span>
                     )}
                   </div>
                 </td>
