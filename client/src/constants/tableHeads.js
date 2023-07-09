@@ -28,3 +28,12 @@ export const productsTableHeads = [
   { id: 7, label: 'موجودی' },
   { id: 8, label: 'عملیات' },
 ];
+
+export const categoriesTableHeads = [
+  { id: 1, label: '#' },
+  { id: 2, label: 'عنوان' },
+  { id: 3, label: 'توضیحات' },
+  { id: 4, label: 'عنوان انگلیسی' },
+  { id: 5, label: 'نوع' },
+  { id: 6, label: 'عملیات' },
+];
