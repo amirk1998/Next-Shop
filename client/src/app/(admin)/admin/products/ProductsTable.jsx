@@ -4,6 +4,8 @@ import {
   toPersianNumbersWithComma,
 } from '@/utils/toPersianNumbers';
 import Link from 'next/link';
+import { HiEye, HiTrash } from 'react-icons/hi2';
+import { RiEdit2Line } from 'react-icons/ri';
 
 const ProductsTable = ({ products }) => {
   return (
@@ -46,12 +48,17 @@ const ProductsTable = ({ products }) => {
                   {toPersianNumbers(product.countInStock)}
                 </td>
                 <td className='table__td'>
-                  <Link
-                    className='text-blue-600 transition-all duration-300 hover:text-blue-800'
-                    href={`/admin/products/${product._id}`}
-                  >
-                    مشاهده جزئیات
-                  </Link>
+                  <div className='flex items-center justify-center gap-x-4'>
+                    <Link href={`/admin/products/${product._id}`}>
+                      <HiEye className='h-6 w-6 text-primary-900 hover:text-primary-700' />
+                    </Link>
+                    <button>
+                      <HiTrash className='h-6 w-6 text-rose-600 hover:text-rose-800' />
+                    </button>
+                    <Link href={`/admin/products/edit/${product._id}`}>
+                      <RiEdit2Line className='h-6 w-6 text-secondary-600 hover:text-secondary-800' />
+                    </Link>
+                  </div>
                 </td>
               </tr>
             );
