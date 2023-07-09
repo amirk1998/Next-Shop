@@ -6,13 +6,6 @@ import { useRouter } from 'next/navigation';
 import { useAddCategory } from '@/hooks/useCategories';
 import CategoryForm from '@/components/CategoryForm';
 
-const categoryTypes = [
-  { id: 1, title: 'محصول', value: 'product' },
-  { id: 2, title: 'پست', value: 'post' },
-  { id: 3, title: 'تیکت', value: 'ticket' },
-  { id: 4, title: 'کامنت', value: 'comment' },
-];
-
 const AddCategories = () => {
   const { isLoading, mutateAsync } = useAddCategory();
   const [category, setCategory] = useState({
@@ -49,7 +42,6 @@ const AddCategories = () => {
         onSubmit={handelSubmit}
         categoryData={category}
         categoryDataOnChange={handleChange}
-        categoryTypes={categoryTypes}
         selectedType={selectedType}
         setSelectedType={setSelectedType}
         isLoading={isLoading}

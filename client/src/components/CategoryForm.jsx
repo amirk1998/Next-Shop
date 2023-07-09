@@ -20,6 +20,13 @@ const categoriesFormData = [
   },
 ];
 
+export const categoryTypes = [
+  { id: 1, title: 'محصول', value: 'product' },
+  { id: 2, title: 'پست', value: 'post' },
+  { id: 3, title: 'تیکت', value: 'ticket' },
+  { id: 4, title: 'کامنت', value: 'comment' },
+];
+
 const customStyles = {
   control: (styles) => ({
     ...styles,
@@ -33,7 +40,6 @@ const CategoryForm = ({
   onSubmit,
   categoryData,
   categoryDataOnChange,
-  categoryTypes,
   selectedType,
   setSelectedType,
   isLoading,
