@@ -7,3 +7,8 @@ export function getCategories() {
 export function getCategoryById(id) {
   return http.get(`/category/${id}`).then(({ data }) => data.data);
 }
+
+//Admin Related Functions
+export function addCategory(data) {
+  return http.post(`/admin/category/add`, data).then(({ data }) => data.data);
+}

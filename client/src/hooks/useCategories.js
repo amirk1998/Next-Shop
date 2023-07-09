@@ -1,5 +1,9 @@
-import { getCategories, getCategoryById } from '@/services/categoryService';
-import { useQuery } from '@tanstack/react-query';
+import {
+  addCategory,
+  getCategories,
+  getCategoryById,
+} from '@/services/categoryService';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useGetCategories = () =>
   useQuery({
@@ -16,3 +20,7 @@ export const useGetCategoryById = (id) =>
     retry: false,
     refetchOnWindowFocus: true,
   });
+
+export const useAddCategory = () => {
+  return useMutation({ mutationFn: addCategory });
+};
