@@ -37,3 +37,15 @@ export const categoriesTableHeads = [
   { id: 5, label: 'نوع' },
   { id: 6, label: 'عملیات' },
 ];
+
+export const adminPaymentsTableHeads = [
+  { id: 1, label: '#' },
+  { id: 2, label: 'شماره فاکتور' },
+  { id: 3, label: 'تاریخ' },
+  { id: 4, label: 'کاربر' },
+  { id: 5, label: 'محصولات' },
+  { id: 6, label: 'مبلغ' },
+  { id: 7, label: 'وضعیت' },
+  { id: 8, label: 'توضیحات' },
+  { id: 9, label: 'عملیات' },
+];
