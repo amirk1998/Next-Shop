@@ -2,6 +2,9 @@ import LoadingButton from '@/common/LoadingButton';
 import RadioInput from '@/common/RadioInput';
 import TextField from '@/common/TextField';
 import Select from 'react-select';
+import DatePicker from 'react-multi-date-picker';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
 
 const couponsFormData = [
   {
@@ -38,6 +41,8 @@ const CouponForm = ({
   setType,
   products,
   setProductIds,
+  expireDate,
+  setExpireDate,
   isLoading,
   buttonText,
 }) => {
@@ -96,6 +101,33 @@ const CouponForm = ({
           />
         </div>
 
+        <div className='w-full'>
+          <label htmlFor='date-picker' className='mb-4 block'>
+            تاریخ انقضا
+          </label>
+          <DatePicker
+            id='date-picker'
+            value={expireDate}
+            onChange={setExpireDate}
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition='bottom-center'
+            format='YYYY/MM/DD'
+            style={{
+              backgroundColor: '#f3f4f6',
+              width: '100%',
+              boxSizing: 'border-box',
+              // borderColor: '#f3f4f6',
+              height: '52px',
+              fontSize: '16px',
+              borderRadius: '12px',
+              padding: '8px 10px',
+            }}
+            containerStyle={{
+              width: '100%',
+            }}
+          />
+        </div>
         <div>
           {isLoading ? (
             <LoadingButton isWidthFull={true} />

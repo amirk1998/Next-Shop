@@ -58,24 +58,6 @@ const CouponsTable = ({ coupons }) => {
                 <td className='table__td'>
                   {toLocalDateStringShort(coupon.expireDate)}
                 </td>
-
-                {/* <td className='table__td'>
-                  <span className='badge badge--secondary'>
-                    {product.category.title}
-                  </span>
-                </td>
-                <td className='table__td'>
-                  {toPersianNumbersWithComma(product.price)}
-                </td>
-                <td className='table__td'>
-                  {toPersianNumbersWithComma(product.discount)} %
-                </td>
-                <td className='table__td font-semibold'>
-                  {toPersianNumbersWithComma(product.offPrice)}
-                </td>
-                <td className='table__td'>
-                  {toPersianNumbers(product.countInStock)}
-                </td> */}
               </tr>
             );
           })}
