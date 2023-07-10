@@ -21,10 +21,10 @@ const categoriesFormData = [
 ];
 
 export const categoryTypes = [
-  { id: 1, title: 'محصول', value: 'product' },
-  { id: 2, title: 'پست', value: 'post' },
-  { id: 3, title: 'تیکت', value: 'ticket' },
-  { id: 4, title: 'کامنت', value: 'comment' },
+  { label: 'محصول', value: 'product' },
+  { label: 'پست', value: 'post' },
+  { label: 'تیکت', value: 'ticket' },
+  { label: 'کامنت', value: 'comment' },
 ];
 
 const customStyles = {
@@ -38,8 +38,8 @@ const customStyles = {
 
 const CategoryForm = ({
   onSubmit,
-  categoryData,
-  categoryDataOnChange,
+  category,
+  handelChange,
   selectedType,
   setSelectedType,
   isLoading,
@@ -54,8 +54,8 @@ const CategoryForm = ({
               label={item.label}
               name={item.name}
               key={item.id}
-              value={categoryData[item.name]}
-              onChange={categoryDataOnChange}
+              value={category[item.name]}
+              onChange={handelChange}
             />
           );
         })}
@@ -68,8 +68,6 @@ const CategoryForm = ({
             name='type'
             onChange={setSelectedType}
             options={categoryTypes}
-            getOptionLabel={(option) => option.title}
-            getOptionValue={(option) => option.value}
             defaultValue={selectedType}
             styles={customStyles}
             placeholder='نوع'

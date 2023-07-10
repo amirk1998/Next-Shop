@@ -14,7 +14,6 @@ const EditCategories = () => {
   const { id } = useParams();
   const { data, isLoading: isLoadingCategory } = useGetCategoryById(id);
   const { category } = data || {};
-  console.log(category);
   const [formData, setFormData] = useState({
     title: '',
     englishTitle: '',
@@ -23,8 +22,6 @@ const EditCategories = () => {
   const [selectedType, setSelectedType] = useState('');
   const { isLoading, mutateAsync } = useUpdateCategory();
   const router = useRouter();
-
-  console.log(selectedType.value);
 
   useEffect(() => {
     if (category) {
@@ -41,9 +38,9 @@ const EditCategories = () => {
     e.preventDefault();
     try {
       const { message } = await mutateAsync({
-        categoryId: category._id,
+        id: category._id,
         data: {
-          ...category,
+          ...formData,
           type: selectedType.value,
         },
       });
@@ -53,19 +50,22 @@ const EditCategories = () => {
       if (error?.response?.data) {
         toast.error(error.response.data.message);
       }
+      console.log(error);
     }
   };
 
   if (isLoadingCategory) return <LoadingSpinner />;
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className='w-full'>
       <h1 className='mb-6 text-4xl font-bold'>ویرایش دسته بندی </h1>
       <CategoryForm
         onSubmit={handelSubmit}
-        categoryData={formData}
-        categoryDataOnChange={handleChange}
-        selectedType={selectedType}
+        category={formData}
+        handelChange={handleChange}
+        selectedType={categoryTypes.find((c) => c.value === category.type)}
         setSelectedType={setSelectedType}
         isLoading={isLoading}
         buttonText='ویرایش دسته بندی '
@@ -75,5 +75,3 @@ const EditCategories = () => {
 };
 
 export default EditCategories;
-// TODO => FIX BUG : REACT_SELECT
-//BUG
