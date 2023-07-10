@@ -1,13 +1,32 @@
+'use client';
 import { productsTableHeads } from '@/constants/tableHeads';
+import { useRemoveProduct } from '@/hooks/useProducts';
 import {
   toPersianNumbers,
   toPersianNumbersWithComma,
 } from '@/utils/toPersianNumbers';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 import { HiEye, HiTrash } from 'react-icons/hi2';
 import { RiEdit2Line } from 'react-icons/ri';
 
 const ProductsTable = ({ products }) => {
+  const { mutateAsync } = useRemoveProduct();
+  const queryClient = useQueryClient();
+
+  const handlerRemoveProduct = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ['get-products'] });
+    } catch (error) {
+      if (error?.response?.data) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <div className='my-8 overflow-auto shadow-sm'>
       <table className='w-full min-w-[800px] table-auto border-collapse'>
@@ -52,7 +71,7 @@ const ProductsTable = ({ products }) => {
                     <Link href={`/admin/products/${product._id}`}>
                       <HiEye className='h-6 w-6 text-primary-900 hover:text-primary-700' />
                     </Link>
-                    <button>
+                    <button onClick={() => handlerRemoveProduct(product._id)}>
                       <HiTrash className='h-6 w-6 text-rose-600 hover:text-rose-800' />
                     </button>
                     <Link href={`/admin/products/edit/${product._id}`}>

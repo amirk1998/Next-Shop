@@ -2,7 +2,7 @@ import { usersListTableHeads } from '@/constants/tableHeads';
 import { toLocalDateStringShort } from '@/utils/toLocalDate';
 import { toPersianNumbers } from '@/utils/toPersianNumbers';
 import Link from 'next/link';
-import { HiOutlineCheck, HiOutlineXMark } from 'react-icons/hi2';
+import { HiCheckCircle, HiOutlineXMark } from 'react-icons/hi2';
 
 const UsersTable = ({ users }) => {
   function removeDuplicateObjects(arr, property) {
@@ -29,12 +29,12 @@ const UsersTable = ({ users }) => {
                 <td className='table__td'>{toPersianNumbers(index + 1)}</td>
                 <td className='table__td'>{user.name}</td>
                 <td className='table__td'>
-                  <div className='flex items-center gap-x-2 whitespace-nowrap'>
-                    {user.phoneNumber}
+                  <div className='flex items-center justify-center gap-x-2 whitespace-nowrap'>
+                    <span className='pt-1'>{user.phoneNumber}</span>
                     {user.isVerifiedPhoneNumber ? (
-                      <HiOutlineCheck className='h-6 w-6 text-green-600' />
+                      <HiCheckCircle className='h-6 w-6 text-green-600' />
                     ) : (
-                      <HiOutlineXMark className='h-6 w-6 text-red-600' />
+                      <HiCheckCircle className='h-6 w-6 text-red-600' />
                     )}
                   </div>
                 </td>

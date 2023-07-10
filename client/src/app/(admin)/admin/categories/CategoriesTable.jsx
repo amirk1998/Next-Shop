@@ -1,13 +1,28 @@
 import { categoriesTableHeads } from '@/constants/tableHeads';
-import {
-  toPersianNumbers,
-  toPersianNumbersWithComma,
-} from '@/utils/toPersianNumbers';
+import { useRemoveCategory } from '@/hooks/useCategories';
+import { toPersianNumbers } from '@/utils/toPersianNumbers';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 import { HiEye, HiTrash } from 'react-icons/hi2';
 import { RiEdit2Line } from 'react-icons/ri';
 
 const CategoriesTable = ({ categories }) => {
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useRemoveCategory();
+
+  const handlerRemoveCategory = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ['get-categories'] });
+    } catch (error) {
+      if (error?.response?.data) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <div className='my-8 overflow-auto shadow-sm'>
       <table className='w-full min-w-[800px] table-auto border-collapse'>
@@ -42,7 +57,7 @@ const CategoriesTable = ({ categories }) => {
                     <Link href={`/admin/categories/${category._id}`}>
                       <HiEye className='h-6 w-6 text-primary-900 hover:text-primary-700' />
                     </Link>
-                    <button>
+                    <button onClick={() => handlerRemoveCategory(category._id)}>
                       <HiTrash className='h-6 w-6 text-rose-600 hover:text-rose-800' />
                     </button>
                     <Link href={`/admin/categories/edit/${category._id}`}>

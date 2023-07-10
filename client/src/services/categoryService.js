@@ -18,3 +18,9 @@ export function updateCategory({ id, data }) {
     .patch(`/admin/category/update/${id}`, data)
     .then(({ data }) => data.data);
 }
+
+export function removeCategory(id) {
+  return http
+    .delete(`/admin/category/remove/${id}`)
+    .then(({ data }) => data.data);
+}

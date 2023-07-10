@@ -2,6 +2,7 @@ import {
   addProduct,
   getProducts,
   getProductsById,
+  removeProduct,
   updateProduct,
 } from '@/services/productService';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -28,4 +29,8 @@ export const useAddProduct = () => {
 
 export const useUpdateProduct = () => {
   return useMutation({ mutationFn: updateProduct });
+};
+
+export const useRemoveProduct = () => {
+  return useMutation({ mutationFn: removeProduct });
 };
