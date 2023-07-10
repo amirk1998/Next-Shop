@@ -40,8 +40,8 @@ const AddCategories = () => {
       <h1 className='mb-6 text-4xl font-bold'>اضافه کردن دسته بندی جدید</h1>
       <CategoryForm
         onSubmit={handelSubmit}
-        categoryData={category}
-        categoryDataOnChange={handleChange}
+        category={category}
+        handelChange={handleChange}
         selectedType={selectedType}
         setSelectedType={setSelectedType}
         isLoading={isLoading}
