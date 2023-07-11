@@ -45,6 +45,7 @@ const CouponForm = ({
   setExpireDate,
   isLoading,
   buttonText,
+  defaultValue = '',
 }) => {
   return (
     <div className='max-w-sm'>
@@ -97,7 +98,7 @@ const CouponForm = ({
             styles={customStyles}
             placeholder='محصولات'
             isRtl={true}
-            // defaultValue={productIds}
+            defaultValue={defaultValue}
           />
         </div>
 

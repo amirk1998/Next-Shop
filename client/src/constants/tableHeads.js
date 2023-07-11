@@ -59,4 +59,5 @@ export const couponsTableHeads = [
   { id: 6, label: 'مقدار مصرفی' },
   { id: 7, label: 'ظرفیت' },
   { id: 8, label: 'تاریخ انقضا' },
+  { id: 9, label: 'عملیات' },
 ];
